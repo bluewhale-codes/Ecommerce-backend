@@ -3,10 +3,15 @@ const errorMiddleware = require("./middleware/error")
 const app = express();
 const cookieParser =  require("cookie-parser")
 const bodyParser = require("body-parser")
+const helmet = require("helmet")
+const hpp = require("hpp");
+
+
 const fileUpload = require("express-fileupload")
 // app.use(express.json());
 app.use(cookieParser());
 app.use(express.json({limit: '50mb'}));
+app.use(helmet())
 
 // Route import
 const product = require("./routes/ProductRoute");
@@ -31,4 +36,5 @@ app.use(fileUpload());
 
 // Middleware for Errors
 app.use(errorMiddleware);
+app.use(hpp)
 module.exports = app;
